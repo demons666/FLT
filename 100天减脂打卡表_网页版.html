@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>100天减脂打卡表</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    .day {
+      background: #fff;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .day h2 {
+      margin-top: 0;
+    }
+    .section {
+      margin: 0.5rem 0;
+    }
+    input[type=checkbox] {
+      margin-right: 8px;
+    }
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h1>💪 100天减脂打卡表</h1>
+  <div id="tracker"></div>
+
+  <script>
+    const startDate = new Date();
+    const tracker = document.getElementById('tracker');
+
+    const breakfast = "蛋白质+复合碳水（如燕麦+鸡蛋+酸奶）";
+    const lunch = "优质蛋白+蔬菜+糙米饭（如鸡胸/牛肉+西兰花+糙米）";
+    const dinner = "清淡低脂（如豆腐+蒸蛋+蔬菜）";
+    const snack = "酸奶/蛋白粉/坚果/水煮蛋（限1-2次/天）";
+
+    for (let i = 0; i < 100; i++) {
+      const date = new Date(startDate);
+      date.setDate(startDate.getDate() + i);
+
+      const weekday = ['日','一','二','三','四','五','六'][date.getDay()];
+      const dayType = date.getDay() === 0 ? '休息或拉伸' : (i % 2 === 0 ? '力量训练（胸背腿核心交替）' : '有氧训练（跳绳/跑步40分钟）');
+
+      const dayBlock = document.createElement('div');
+      dayBlock.className = 'day';
+
+      dayBlock.innerHTML = `
+        <h2>第${i + 1}天 - ${date.toLocaleDateString()}（星期${weekday}）</h2>
+        <div class="section"><label><input type="checkbox"> 早餐：${breakfast}</label></div>
+        <div class="section"><label><input type="checkbox"> 午餐：${lunch}</label></div>
+        <div class="section"><label><input type="checkbox"> 晚餐：${dinner}</label></div>
+        <div class="section"><label><input type="checkbox"> 加餐：${snack}</label></div>
+        <div class="section"><label><input type="checkbox"> 运动安排：${dayType}</label></div>
+      `;
+
+      tracker.appendChild(dayBlock);
+    }
+  </script>
+</body>
+</html>
